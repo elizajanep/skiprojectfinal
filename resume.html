@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume – Eliza J. Pehrson</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:  #0b1826;
+      --navy2: #132337;
+      --blue:  #1a4f72;
+      --mid:   #1f6291;
+      --accent:#4aa8d8;
+      --ice:   #c5def2;
+      --snow:  #f2f7fb;
+      --white: #ffffff;
+      --text:  #1e2d3d;
+      --muted: #5a7086;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--snow);
+      color: var(--text);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background-color: var(--navy) !important;
+      border-bottom: 3px solid var(--accent);
+      padding: 14px 0;
+    }
+    .navbar-brand {
+      color: #fff !important;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+    .nav-link {
+      color: var(--ice) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 14px !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+    .nav-link.active { border-bottom: 2px solid var(--accent); }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: linear-gradient(150deg, var(--navy) 0%, var(--navy2) 40%, var(--blue) 100%);
+      color: #fff;
+      padding: 70px 0 60px;
+      position: relative;
+      text-align: center;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 50px;
+      background: var(--snow);
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    }
+    .page-header .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+    .page-header p {
+      color: var(--ice);
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    /* ===== RESUME WRAPPER ===== */
+    .resume-wrapper {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 4px 40px rgba(11,24,38,0.12);
+      padding: 60px 70px;
+      margin: 48px auto 60px;
+      max-width: 920px;
+      border-top: 5px solid var(--accent);
+    }
+
+    .resume-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .resume-contact {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+    .resume-contact a { color: var(--blue); text-decoration: none; }
+    .resume-contact a:hover { text-decoration: underline; }
+    .resume-top-rule {
+      border: none;
+      border-top: 2px solid var(--ice);
+      margin: 24px 0 34px;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .resume-section { margin-bottom: 36px; }
+    .resume-section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .resume-section-title i { font-size: 0.95rem; color: var(--accent); }
+
+    /* ===== ENTRIES ===== */
+    .resume-entry { margin-bottom: 26px; }
+    .entry-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .entry-org {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+    }
+    .entry-loc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .entry-role {
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--mid);
+    }
+    .entry-dates {
+      font-size: 0.82rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .resume-entry ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .resume-entry ul li {
+      font-size: 0.91rem;
+      color: #344a5f;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    /* ===== SKILLS ===== */
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      list-style: none;
+    }
+    .skill-chips li {
+      background: var(--snow);
+      border: 1.5px solid var(--accent);
+      color: var(--blue);
+      border-radius: 4px;
+      padding: 6px 16px;
+      font-size: 0.83rem;
+      font-weight: 500;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: var(--navy);
+      color: var(--ice);
+      padding: 50px 0 28px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .footer-tagline { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+    .footer-links a {
+      color: var(--ice);
+      text-decoration: none;
+      font-size: 0.88rem;
+      margin: 0 12px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: var(--ice);
+      font-size: 1rem;
+      margin: 0 5px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 32px;
+      padding-top: 20px;
+      font-size: 0.78rem;
+      color: #4a6580;
+    }
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent);
+      color: var(--navy);
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .back-to-top:hover { background-color: #fff; color: var(--navy); transform: translateY(-2px); }
+
+    @media (max-width: 640px) {
+      .resume-wrapper { padding: 30px 20px; }
+      .entry-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Eliza J. Pehrson</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon" style="filter:invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="resume.html">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="scratch.html">Skiing</a></li>
+          <li class="nav-item"><a class="nav-link" href="app.html">Ski App</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <p class="label">Professional Profile</p>
+      <h1>Resume</h1>
+      <p>Marketing &bull; Social Media &bull; Content Creation</p>
+    </div>
+  </div>
+
+  <!-- RESUME -->
+  <div class="container">
+    <div class="resume-wrapper">
+
+      <div class="resume-name">Eliza J. Pehrson</div>
+      <div class="resume-contact">
+        (572) 233-5001 &nbsp;&bull;&nbsp;
+        <a href="mailto:elizajanep@gmail.com">elizajanep@gmail.com</a>
+        &nbsp;&bull;&nbsp;
+        <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank"><i class="bi bi-linkedin me-1"></i>LinkedIn</a>
+      </div>
+      <hr class="resume-top-rule" />
+
+      <!-- EDUCATION -->
+      <div class="resume-section">
+        <div class="resume-section-title"><i class="bi bi-mortarboard-fill"></i>Education</div>
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">Brigham Young University – Marriott School of Business</span>
+            <span class="entry-loc">Provo, UT</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Bachelor of Science in Marketing</span>
+            <span class="entry-dates">Aug 2022 – Present</span>
+          </div>
+          <ul>
+            <li>GPA: <strong>3.81 / 4.00</strong></li>
+            <li>Clubs &amp; Organizations: BYU Marketing Association, Ballet Club, Healthcare Leadership Association</li>
+            <li>Academic Scholarship: Half-Tuition</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="resume-section">
+        <div class="resume-section-title"><i class="bi bi-briefcase-fill"></i>Experience</div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">BYU Performing Arts Management</span>
+            <span class="entry-loc">Provo, UT</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Marketing Assistant</span>
+            <span class="entry-dates">Sept 2025 – Current</span>
+          </div>
+          <ul>
+            <li>Supported marketing campaigns promoting BYU's performing ensembles through print and social media</li>
+            <li>Managed social media calendars and created engaging posts to increase audience awareness and event attendance</li>
+            <li>Managed audio and music video releases, ensuring accurate metadata entries for various ensemble groups</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">Stella H. Oaks Foundation</span>
+            <span class="entry-loc">Salt Lake City, UT</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Social Media / Marketing Intern</span>
+            <span class="entry-dates">Oct 2025 – Jan 2026</span>
+          </div>
+          <ul>
+            <li>Created and managed content for Facebook and Instagram to promote the Foundation's mission and programs</li>
+            <li>Collaborated with the <em>Light the World</em> initiative to create a campaign for the Christmas Giving Machines</li>
+            <li>Shaped the organization's online presence through consistent branding and storytelling</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">The Church of Jesus Christ of Latter-day Saints</span>
+            <span class="entry-loc">Gouda, Netherlands</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Content Creator &amp; Social Media Advertising</span>
+            <span class="entry-dates">Jun 2024 – Jan 2025</span>
+          </div>
+          <ul>
+            <li>Analyzed social media content trends to optimize seasonal campaigns, increasing engagement and response rates</li>
+            <li>Drove a <strong>300% increase</strong> in customer referrals by designing and executing a targeted social media strategy</li>
+            <li>Used Meta services to track content performance, standardize approach, and improve outreach</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">Riverside Country Club</span>
+            <span class="entry-loc">Provo, UT</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Customer Service</span>
+            <span class="entry-dates">Sept 2022 – Dec 2023</span>
+          </div>
+          <ul>
+            <li>Maintained driving range, golf carts, and members' golf clubs with attention to detail and excellent customer service</li>
+            <li>Assisted members with course concerns, building relationships that increased enjoyment and member longevity</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">Dance Studio 150</span>
+            <span class="entry-loc">Edmond, OK</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Dance Teacher</span>
+            <span class="entry-dates">Aug 2021 – Jul 2022</span>
+          </div>
+          <ul>
+            <li>Taught Ballet and Jazz to 5–8-year-olds, building parent trust and maintaining studio reputation</li>
+            <li>Communicated with parents to ensure children's progress, addressing concerns and building muscle memory</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LEADERSHIP & SERVICE -->
+      <div class="resume-section">
+        <div class="resume-section-title"><i class="bi bi-award-fill"></i>Leadership &amp; Service</div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">The Church of Jesus Christ of Latter-day Saints</span>
+            <span class="entry-loc">Belgium &amp; The Netherlands</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Volunteer Representative</span>
+            <span class="entry-dates">Feb 2024 – Aug 2025</span>
+          </div>
+          <ul>
+            <li>Led and prepared leadership trainings for <strong>over 100 full-time volunteers</strong> to develop language and teaching skills</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-row">
+            <span class="entry-org">Citizens Caring for Children</span>
+            <span class="entry-loc">Oklahoma City, OK</span>
+          </div>
+          <div class="entry-row">
+            <span class="entry-role">Volunteer – Teen Board</span>
+            <span class="entry-dates">Aug 2020 – May 2022</span>
+          </div>
+          <ul>
+            <li>Worked with volunteers to provide for children's needs, assist in difficult situations, and observe behavioral trends</li>
+            <li>Planned fundraising events to provide school supplies, clothing, and other needs for foster children</li>
+            <li>Committed to making a meaningful difference in the lives of foster children throughout Oklahoma</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SKILLS & INTERESTS -->
+      <div class="resume-section" style="margin-bottom:0;">
+        <div class="resume-section-title"><i class="bi bi-stars"></i>Skills &amp; Interests</div>
+        <ul class="skill-chips">
+          <li>Microsoft Excel (Solver, Automation)</li>
+          <li>PowerPoint</li>
+          <li>Adobe Premiere Pro</li>
+          <li>Lightroom Classic</li>
+          <li>Meta Ads Manager</li>
+          <li>Social Media Strategy</li>
+          <li>Photography &amp; Videography</li>
+          <li>Dutch (Proficient)</li>
+          <li>Ballet (16 years)</li>
+          <li>Cheerleading</li>
+          <li>Choir</li>
+          <li>Lifeguard Certified</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container text-center">
+      <div class="footer-brand">Eliza J. Pehrson</div>
+      <div class="footer-tagline">Marketing Student &bull; BYU Marriott School of Business &bull; Provo, UT</div>
+
+      <div class="footer-social mb-4">
+        <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:elizajanep@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+      </div>
+
+      <div class="footer-links mb-4">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="scratch.html">Skiing</a>
+        <a href="app.html">Ski App</a>
+        <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank">LinkedIn</a>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="mb-3">
+          <a href="#top" class="back-to-top"><i class="bi bi-arrow-up"></i>Back to Top</a>
+        </div>
+        <p class="mb-0">&copy; 2026 Eliza J. Pehrson &bull; All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

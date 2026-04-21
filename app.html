@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ski Resort Finder – Eliza J. Pehrson</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0b1826;
+      --navy2:  #132337;
+      --blue:   #1a4f72;
+      --mid:    #1f6291;
+      --accent: #4aa8d8;
+      --ice:    #c5def2;
+      --snow:   #f2f7fb;
+      --white:  #ffffff;
+      --text:   #1e2d3d;
+      --muted:  #5a7086;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--snow);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      background: var(--navy);
+      border-bottom: 3px solid var(--accent);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .brand {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    nav .links a {
+      color: var(--ice);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+    nav .links a:hover { color: var(--accent); }
+    nav .links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+
+    /* ===== PAGE HEADER ===== */
+    header {
+      background: linear-gradient(150deg, var(--navy) 0%, var(--navy2) 40%, var(--blue) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 70px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 160px;
+      background: rgba(255,255,255,0.03);
+      clip-path: polygon(0 100%, 12% 38%, 25% 75%, 38% 18%, 52% 65%, 65% 30%, 78% 60%, 88% 22%, 100% 45%, 100% 100%);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 50px;
+      background: var(--snow);
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    }
+    .header-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    .header-rule {
+      width: 50px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 18px auto;
+    }
+    header p {
+      font-size: 1rem;
+      color: var(--ice);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 300;
+      position: relative;
+    }
+
+    /* ===== MAIN WRAPPER ===== */
+    main {
+      max-width: 720px;
+      margin: 52px auto 64px;
+      padding: 0 20px;
+    }
+
+    /* ===== QUIZ CARD ===== */
+    .quiz-card {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 4px 40px rgba(11,24,38,0.12);
+      padding: 50px 56px;
+      border-top: 5px solid var(--accent);
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-wrap { margin-bottom: 36px; }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .progress-track {
+      background: var(--ice);
+      border-radius: 10px;
+      height: 6px;
+    }
+    .progress-fill {
+      background: linear-gradient(90deg, var(--accent), var(--mid));
+      height: 6px;
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    /* ===== QUESTION ===== */
+    .q-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .q-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.4;
+      margin-bottom: 30px;
+    }
+
+    /* ===== OPTIONS ===== */
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option-btn {
+      background: var(--snow);
+      border: 2px solid #dde8f0;
+      border-radius: 8px;
+      padding: 16px 22px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+    .option-btn:hover {
+      border-color: var(--accent);
+      background: #eaf4fb;
+      transform: translateX(4px);
+    }
+    .option-btn.selected {
+      border-color: var(--blue);
+      background: #deeef9;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .option-icon { font-size: 1.5rem; flex-shrink: 0; width: 36px; text-align: center; }
+
+    /* ===== NAV BUTTONS ===== */
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 34px;
+      gap: 12px;
+    }
+    .btn {
+      padding: 13px 30px;
+      border-radius: 4px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--mid); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,79,114,0.35); }
+    .btn-secondary { background: var(--ice); color: var(--navy); }
+    .btn-secondary:hover { background: #b3d4ed; transform: translateY(-2px); }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ===== RESULT ===== */
+    #result-section { display: none; }
+
+    .result-top {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px; height: 88px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 50%;
+      font-size: 2.8rem;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 24px rgba(11,24,38,0.25);
+    }
+    .result-top h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .result-tagline {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .resort-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      border-radius: 10px;
+      color: #fff;
+      padding: 34px 38px;
+      margin: 24px 0;
+    }
+    .resort-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .resort-loc {
+      font-size: 0.85rem;
+      color: var(--ice);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .resort-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 12px 18px;
+      flex: 1 1 90px;
+      text-align: center;
+    }
+    .stat-val {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-lbl {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--ice);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    .resort-desc {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--ice);
+    }
+
+    .match-box {
+      background: var(--snow);
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .match-box h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+    .match-box ul { list-style: none; padding: 0; }
+    .match-box ul li {
+      font-size: 0.93rem;
+      color: #344a5f;
+      padding: 6px 0 6px 26px;
+      position: relative;
+      border-bottom: 1px solid #e8f0f7;
+      line-height: 1.55;
+    }
+    .match-box ul li:last-child { border-bottom: none; }
+    .match-box ul li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+
+    .retry-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--navy), var(--mid));
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .retry-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy);
+      color: var(--ice);
+      text-align: center;
+      padding: 50px 20px 28px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .footer-tagline { font-size: 0.83rem; color: var(--muted); margin-bottom: 28px; }
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: var(--ice);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin: 0 5px 20px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .footer-links a {
+      color: var(--ice);
+      text-decoration: none;
+      font-size: 0.86rem;
+      margin: 0 12px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 30px;
+      padding-top: 22px;
+      font-size: 0.78rem;
+      color: #4a6580;
+    }
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent);
+      color: var(--navy);
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 14px;
+    }
+    .back-to-top:hover { background: #fff; color: var(--navy); transform: translateY(-2px); }
+
+    @media (max-width: 600px) {
+      .quiz-card { padding: 30px 20px; }
+      nav { flex-direction: column; gap: 10px; padding: 14px 20px; }
+      nav .links a { margin-left: 10px; margin-right: 10px; }
+      .resort-card { padding: 24px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Eliza J. Pehrson</a>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="scratch.html">Skiing</a>
+        <a href="app.html" class="active">Ski App</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <p class="header-label">Interactive Tool</p>
+    <h1>&#9971; Ski Resort Finder</h1>
+    <div class="header-rule"></div>
+    <p>Answer 6 quick questions and we'll match you with your perfect ski resort.</p>
+  </header>
+
+  <main>
+    <div class="quiz-card">
+
+      <!-- QUIZ -->
+      <div id="quiz-section">
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span id="progress-text">Question 1 of 6</span>
+            <span id="progress-pct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width:0%;"></div>
+          </div>
+        </div>
+
+        <div class="q-label" id="q-num">Question 1</div>
+        <div class="q-text" id="q-text"></div>
+        <div class="options" id="q-options"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" id="btn-back" onclick="goBack()" disabled>&#8592; Back</button>
+          <button class="btn btn-primary" id="btn-next" onclick="goNext()" disabled>Next &#8594;</button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div id="result-section">
+        <div class="result-top">
+          <div class="result-badge" id="result-badge">&#9971;</div>
+          <h2>Your Perfect Resort</h2>
+          <p class="result-tagline" id="result-tagline"></p>
+        </div>
+
+        <div class="resort-card">
+          <div class="resort-name" id="resort-name"></div>
+          <div class="resort-loc" id="resort-loc"></div>
+          <div class="resort-stats" id="resort-stats"></div>
+          <div class="resort-desc" id="resort-desc"></div>
+        </div>
+
+        <div class="match-box">
+          <h4>Why You'll Love It</h4>
+          <ul id="match-reasons"></ul>
+        </div>
+
+        <button class="retry-btn" onclick="resetQuiz()">&#8635; &nbsp; Retake the Quiz</button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-brand">Eliza J. Pehrson</div>
+    <div class="footer-tagline">Marketing Student &bull; BYU Marriott School of Business &bull; Provo, UT</div>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank" title="LinkedIn">in</a>
+      <a href="mailto:elizajanep@gmail.com" title="Email">@</a>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="scratch.html">Skiing</a>
+      <a href="app.html">Ski App</a>
+      <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-bottom">
+      <a href="#top" class="back-to-top">&#8593; Back to Top</a>
+      <p>&copy; 2026 Eliza J. Pehrson &bull; All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        text: "What's your skiing skill level?",
+        options: [
+          { icon: "🟢", label: "Beginner — I'm still learning the basics", value: "beginner" },
+          { icon: "🔵", label: "Intermediate — I handle blue runs confidently", value: "intermediate" },
+          { icon: "⚫", label: "Advanced — I love challenging terrain and steep lines", value: "advanced" },
+          { icon: "🏆", label: "Expert — I seek double blacks, cliffs, and deep powder", value: "expert" }
+        ],
+        key: "skill"
+      },
+      {
+        text: "What kind of snow do you dream about?",
+        options: [
+          { icon: "❄️", label: "Light, dry powder — the legendary stuff", value: "powder" },
+          { icon: "🏔️", label: "Perfectly groomed corduroy runs at sunrise", value: "groomed" },
+          { icon: "🌲", label: "Untracked tree skiing after a big storm", value: "trees" },
+          { icon: "☀️", label: "Spring corn snow — warm, sunny, and fun", value: "spring" }
+        ],
+        key: "snow"
+      },
+      {
+        text: "What's the vibe you're looking for?",
+        options: [
+          { icon: "🎿", label: "Pure skiing — maximum vert, minimum crowds", value: "hardcore" },
+          { icon: "🍻", label: "Lively après-ski, village scene, and great nightlife", value: "social" },
+          { icon: "👨‍👩‍👧", label: "Family-friendly with great amenities and easy access", value: "family" },
+          { icon: "🧘", label: "Peaceful and scenic — I ski for the views", value: "scenic" }
+        ],
+        key: "vibe"
+      },
+      {
+        text: "How many days are you planning to ski?",
+        options: [
+          { icon: "1️⃣", label: "Day trip or quick weekend getaway", value: "short" },
+          { icon: "📅", label: "3–5 day ski vacation", value: "medium" },
+          { icon: "🏠", label: "A full week or longer", value: "long" },
+          { icon: "🔄", label: "I ski multiple times per season", value: "season" }
+        ],
+        key: "duration"
+      },
+      {
+        text: "What terrain do you gravitate toward most?",
+        options: [
+          { icon: "🏔️", label: "Wide open bowls with big vertical drops", value: "bowls" },
+          { icon: "🌲", label: "Tight tree runs and hidden glades", value: "glades" },
+          { icon: "🛤️", label: "Long, flowing cruiser runs", value: "cruisers" },
+          { icon: "🏂", label: "Parks, pipes, and freestyle features", value: "freestyle" }
+        ],
+        key: "terrain"
+      },
+      {
+        text: "Where are you willing to travel?",
+        options: [
+          { icon: "🏡", label: "Utah — legendary powder and world-class resorts", value: "utah" },
+          { icon: "🦅", label: "Colorado — iconic resorts and charming mountain towns", value: "colorado" },
+          { icon: "🌊", label: "Pacific Northwest — big mountains, massive snowfall", value: "pnw" },
+          { icon: "🌍", label: "Anywhere — just find me my perfect mountain!", value: "any" }
+        ],
+        key: "location"
+      }
+    ];
+
+    const resorts = [
+      {
+        id: "snowbird", name: "Snowbird", loc: "Little Cottonwood Canyon, Utah", emoji: "🦅",
+        tagline: "Utah's most legendary terrain is waiting for you.",
+        stats: [{ val:"3,240", lbl:"Acres" },{ val:"3,240'", lbl:"Vertical" },{ val:"500\"", lbl:"Avg Snowfall" },{ val:"169", lbl:"Trails" }],
+        desc: "Snowbird is a mecca for serious skiers. With over 3,000 acres of high-alpine terrain, a 125-passenger aerial tram, and Utah's famous light dry powder, it's consistently ranked among the best ski resorts in North America. Challenging, uncompromising, and absolutely world-class.",
+        reasons: ["Legendary Utah powder averaging 500+ inches annually","Massive 3,240-foot vertical drop for long, thrilling descents","World-class expert and advanced terrain throughout","Tram access to the summit in just minutes"],
+        weights: { skill:{expert:5,advanced:4,intermediate:2,beginner:0}, snow:{powder:5,trees:4,groomed:2,spring:2}, vibe:{hardcore:5,scenic:3,social:2,family:1}, location:{utah:5,any:4,colorado:1,pnw:1}, terrain:{bowls:5,glades:4,cruisers:2,freestyle:1} }
+      },
+      {
+        id: "park-city", name: "Park City Mountain", loc: "Park City, Utah", emoji: "🏙️",
+        tagline: "The biggest resort in the U.S. — something for everyone.",
+        stats: [{ val:"7,300", lbl:"Acres" },{ val:"3,226'", lbl:"Vertical" },{ val:"348", lbl:"Trails" },{ val:"41", lbl:"Lifts" }],
+        desc: "Park City Mountain is the largest ski resort in the United States, offering 7,300 acres of terrain for every skill level, a vibrant historic Main Street, and easy access from Salt Lake City. Whether you're a beginner or a seasoned black-diamond skier, Park City has the perfect run for you.",
+        reasons: ["Largest ski resort in the U.S. — endless variety across 7,300 acres","Historic Park City village with world-class dining and nightlife","Beginner-friendly terrain alongside expert challenges","Only 45 minutes from Salt Lake City International Airport"],
+        weights: { skill:{beginner:4,intermediate:5,advanced:4,expert:3}, snow:{groomed:5,powder:3,trees:3,spring:4}, vibe:{social:5,family:5,hardcore:3,scenic:3}, location:{utah:5,any:4,colorado:1,pnw:1}, terrain:{cruisers:5,freestyle:4,bowls:3,glades:3} }
+      },
+      {
+        id: "vail", name: "Vail", loc: "Vail, Colorado", emoji: "🏔️",
+        tagline: "World-class skiing meets world-class village life.",
+        stats: [{ val:"5,317", lbl:"Acres" },{ val:"3,450'", lbl:"Vertical" },{ val:"195", lbl:"Trails" },{ val:"31", lbl:"Lifts" }],
+        desc: "Vail is synonymous with the ski resort experience at its finest. Its legendary Back Bowls offer some of the best powder skiing in Colorado, while the iconic Vail Village provides an unmatched après-ski atmosphere. This is the resort you dream about when you imagine skiing in Colorado.",
+        reasons: ["Famous Back Bowls for incredible powder days and bowl skiing","Legendary Vail Village with top-tier dining and nightlife","5,300+ acres with expert terrain and beginner zones alike","World-renowned ski instruction and children's programs"],
+        weights: { skill:{intermediate:4,advanced:5,expert:4,beginner:3}, snow:{powder:5,groomed:4,trees:3,spring:3}, vibe:{social:5,scenic:4,hardcore:3,family:4}, location:{colorado:5,any:4,utah:1,pnw:1}, terrain:{bowls:5,cruisers:4,glades:3,freestyle:3} }
+      },
+      {
+        id: "telluride", name: "Telluride", loc: "Telluride, Colorado", emoji: "🌄",
+        tagline: "Dramatic scenery, world-class skiing, zero crowds.",
+        stats: [{ val:"2,000", lbl:"Acres" },{ val:"4,425'", lbl:"Vertical" },{ val:"148", lbl:"Trails" },{ val:"19", lbl:"Lifts" }],
+        desc: "Telluride sits in one of the most spectacular settings of any ski resort on Earth — a dramatic box canyon surrounded by 14,000-foot peaks. With the highest vertical in Colorado and a charming Victorian-era town, Telluride delivers breathtaking scenery alongside serious, uncrowded terrain.",
+        reasons: ["Highest vertical drop in Colorado at an impressive 4,425 feet","Stunning box canyon location — unrivaled natural beauty","Intimate atmosphere with far fewer crowds than major resorts","Charming historic town with exceptional culture and dining"],
+        weights: { skill:{advanced:5,expert:5,intermediate:3,beginner:2}, snow:{powder:4,groomed:3,trees:4,spring:3}, vibe:{scenic:5,hardcore:4,social:3,family:3}, location:{colorado:5,any:4,utah:1,pnw:1}, terrain:{bowls:4,glades:5,cruisers:3,freestyle:2} }
+      },
+      {
+        id: "whistler", name: "Whistler Blackcomb", loc: "Whistler, British Columbia", emoji: "🍁",
+        tagline: "North America's #1 resort — massive, majestic, unmissable.",
+        stats: [{ val:"8,171", lbl:"Acres" },{ val:"5,280'", lbl:"Vertical" },{ val:"200+", lbl:"Trails" },{ val:"37", lbl:"Lifts" }],
+        desc: "Whistler Blackcomb is consistently ranked the #1 ski resort in North America. Two massive mountains, 8,171 acres of skiable terrain, and a vertical drop of over 5,000 feet make it a bucket-list destination. The vibrant Whistler Village adds world-class amenities, dining, and nightlife.",
+        reasons: ["Largest ski resort in North America by total skiable area","Legendary 5,280-foot vertical — the biggest on the continent","Two distinct mountains connected by the iconic PEAK 2 PEAK gondola","Vibrant village with incredible restaurants, nightlife, and shops"],
+        weights: { skill:{expert:5,advanced:5,intermediate:4,beginner:3}, snow:{powder:4,trees:5,groomed:3,spring:3}, vibe:{social:5,hardcore:4,scenic:5,family:4}, location:{pnw:5,any:5,colorado:2,utah:2}, terrain:{glades:5,bowls:5,cruisers:3,freestyle:4} }
+      },
+      {
+        id: "deer-valley", name: "Deer Valley", loc: "Park City, Utah", emoji: "🦌",
+        tagline: "The gold standard of luxury ski resort experiences.",
+        stats: [{ val:"2,026", lbl:"Acres" },{ val:"3,000'", lbl:"Vertical" },{ val:"103", lbl:"Trails" },{ val:"21", lbl:"Lifts" }],
+        desc: "Deer Valley is Utah's most prestigious ski resort, consistently ranked #1 for service, grooming, and overall experience. With immaculately groomed runs, slope-side gourmet dining, and impeccable service at every turn, Deer Valley is the gold standard for luxury skiing. Skiers only — no snowboards.",
+        reasons: ["Consistently ranked the #1 ski resort in the U.S. for service","Impeccably groomed runs — some of the finest corduroy in the world","Controlled daily ticket sales mean uncrowded, peaceful slopes","Exceptional slope-side dining and white-glove mountain amenities"],
+        weights: { skill:{intermediate:5,beginner:4,advanced:4,expert:3}, snow:{groomed:5,spring:5,powder:3,trees:2}, vibe:{scenic:5,family:5,social:4,hardcore:2}, location:{utah:5,any:4,colorado:1,pnw:1}, terrain:{cruisers:5,bowls:3,glades:2,freestyle:1} }
+      }
+    ];
+
+    let currentQ = 0;
+    let answers = {};
+    let selectedIndex = null;
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      document.getElementById('q-num').textContent = `Question ${currentQ + 1}`;
+      document.getElementById('q-text').textContent = q.text;
+      document.getElementById('progress-text').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+      const pct = Math.round((currentQ / questions.length) * 100);
+      document.getElementById('progress-pct').textContent = pct + '%';
+      document.getElementById('progress-fill').style.width = pct + '%';
+
+      const container = document.getElementById('q-options');
+      container.innerHTML = '';
+      selectedIndex = answers[q.key] !== undefined
+        ? q.options.findIndex(o => o.value === answers[q.key])
+        : null;
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn' + (selectedIndex === i ? ' selected' : '');
+        btn.innerHTML = `<span class="option-icon">${opt.icon}</span><span>${opt.label}</span>`;
+        btn.onclick = () => selectOption(i, opt.value, q.key);
+        container.appendChild(btn);
+      });
+
+      document.getElementById('btn-back').disabled = (currentQ === 0);
+      document.getElementById('btn-next').disabled = (selectedIndex === null);
+      document.getElementById('btn-next').textContent =
+        currentQ === questions.length - 1 ? 'See My Resort ✓' : 'Next →';
+    }
+
+    function selectOption(index, value, key) {
+      answers[key] = value;
+      selectedIndex = index;
+      document.querySelectorAll('.option-btn').forEach((b, i) => {
+        b.classList.toggle('selected', i === index);
+      });
+      document.getElementById('btn-next').disabled = false;
+    }
+
+    function goNext() {
+      if (selectedIndex === null) return;
+      if (currentQ < questions.length - 1) { currentQ++; renderQuestion(); }
+      else { showResult(); }
+    }
+
+    function goBack() {
+      if (currentQ > 0) { currentQ--; renderQuestion(); }
+    }
+
+    function showResult() {
+      const scores = resorts.map(r => {
+        let score = 0;
+        for (const [key, val] of Object.entries(answers)) {
+          if (r.weights[key] && r.weights[key][val] !== undefined) score += r.weights[key][val];
+        }
+        return { resort: r, score };
+      });
+      scores.sort((a, b) => b.score - a.score);
+      const best = scores[0].resort;
+
+      document.getElementById('quiz-section').style.display = 'none';
+      document.getElementById('result-section').style.display = 'block';
+
+      document.getElementById('result-badge').textContent = best.emoji;
+      document.getElementById('result-tagline').textContent = best.tagline;
+      document.getElementById('resort-name').textContent = best.name;
+      document.getElementById('resort-loc').textContent = '📍 ' + best.loc;
+      document.getElementById('resort-desc').textContent = best.desc;
+
+      document.getElementById('resort-stats').innerHTML = best.stats.map(s =>
+        `<div class="stat-box"><span class="stat-val">${s.val}</span><span class="stat-lbl">${s.lbl}</span></div>`
+      ).join('');
+
+      document.getElementById('match-reasons').innerHTML =
+        best.reasons.map(r => `<li>${r}</li>`).join('');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      currentQ = 0; answers = {}; selectedIndex = null;
+      document.getElementById('result-section').style.display = 'none';
+      document.getElementById('quiz-section').style.display = 'block';
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

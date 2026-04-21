@@ -1,0 +1,495 @@
+/* =============================================
+   scratch.css — Skiing Page Custom Stylesheet
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* --- VARIABLES --- */
+:root {
+  --navy:   #0b1826;
+  --navy2:  #132337;
+  --blue:   #1a4f72;
+  --mid:    #1f6291;
+  --accent: #4aa8d8;
+  --ice:    #c5def2;
+  --snow:   #f2f7fb;
+  --white:  #ffffff;
+  --text:   #1e2d3d;
+  --muted:  #5a7086;
+}
+
+/* --- BODY --- */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--snow);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== NAV DIV ===== */
+div.ski-nav {
+  background-color: var(--navy);
+  border-bottom: 3px solid var(--accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+div.ski-nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+div.ski-nav .brand {
+  color: #ffffff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+div.ski-nav .nav-links a {
+  color: var(--ice);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+div.ski-nav .nav-links a:hover {
+  color: var(--accent);
+}
+
+/* ===== HERO DIV ===== */
+div.ski-hero {
+  background: linear-gradient(150deg, var(--navy) 0%, var(--navy2) 40%, var(--blue) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 110px 20px 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mountain silhouette overlay */
+div.ski-hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 220px;
+  background: rgba(255, 255, 255, 0.03);
+  clip-path: polygon(0 100%, 12% 38%, 25% 75%, 38% 18%, 52% 65%, 65% 30%, 78% 60%, 88% 22%, 100% 45%, 100% 100%);
+}
+
+div.ski-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: var(--snow);
+  clip-path: polygon(0 100%, 100% 100%, 100% 35%, 75% 100%, 50% 20%, 25% 90%, 0 55%);
+}
+
+div.ski-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+p.ski-hero-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+div.ski-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+div.ski-hero-rule {
+  width: 56px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 22px auto;
+}
+
+div.ski-hero p {
+  font-size: 1.1rem;
+  color: var(--ice);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+div.ski-hero-scroll {
+  margin-top: 32px;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ===== SECTION WRAPPER DIV ===== */
+div.ski-section {
+  max-width: 980px;
+  margin: 60px auto;
+  padding: 0 32px;
+}
+
+div.ski-section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+div.ski-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+div.ski-rule {
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 28px;
+}
+
+/* ===== CARD DIV ===== */
+div.ski-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 30px rgba(11,24,38,0.09);
+  padding: 40px 44px;
+  border-top: 4px solid var(--accent);
+}
+
+div.ski-card p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #344a5f;
+  margin-bottom: 18px;
+}
+
+div.ski-card p:last-child { margin-bottom: 0; }
+
+/* Quote block */
+div.ski-quote {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: var(--ice);
+  border-radius: 6px;
+  padding: 26px 32px;
+  margin-top: 24px;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.7;
+  position: relative;
+}
+
+span.ski-quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: var(--accent);
+  line-height: 0;
+  vertical-align: -0.5rem;
+  margin-right: 6px;
+  font-style: normal;
+}
+
+span.ski-quote-attr {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: rgba(197, 222, 242, 0.7);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ===== IMAGE GRID ===== */
+div.img-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 4px 0 24px;
+}
+
+div.img-grid img {
+  flex: 1 1 260px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+div.img-grid img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+}
+
+/* ===== ORDERED + UNORDERED LISTS ===== */
+ol.ski-ordered {
+  font-size: 0.97rem;
+  color: var(--text);
+  padding-left: 22px;
+  line-height: 1.6;
+  margin-top: 16px;
+}
+
+ol.ski-ordered > li {
+  margin-bottom: 18px;
+  font-weight: 600;
+  color: var(--blue);
+  font-size: 0.98rem;
+}
+
+ul.ski-unordered {
+  list-style-type: disc;
+  padding-left: 22px;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+ul.ski-unordered li {
+  font-weight: 400;
+  color: #344a5f;
+  font-size: 0.92rem;
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+/* ===== VIDEO WRAPPER ===== */
+div.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  margin-top: 20px;
+}
+
+div.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ===== TABLEAU WRAPPER ===== */
+div.tableau-wrap {
+  background: #fafcfe;
+  border-radius: 8px;
+  border: 1.5px solid var(--ice);
+  overflow: hidden;
+  margin-top: 20px;
+  min-height: 500px;
+}
+
+/* ===== CTA BLOCK ===== */
+div.ski-cta {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: 12px;
+  padding: 2px;
+  box-shadow: 0 8px 36px rgba(11,24,38,0.2);
+}
+
+div.ski-cta-inner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: 10px;
+  padding: 52px 48px;
+  text-align: center;
+  color: var(--white);
+}
+
+div.ski-cta-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+div.ski-cta-inner h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--white);
+}
+
+div.ski-cta-inner p {
+  font-size: 1rem;
+  color: var(--ice);
+  max-width: 560px;
+  margin: 0 auto 28px;
+  line-height: 1.8;
+}
+
+a.ski-cta-btn {
+  display: inline-block;
+  background-color: var(--accent);
+  color: var(--navy);
+  padding: 14px 36px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+a.ski-cta-btn:hover {
+  background-color: var(--white);
+  color: var(--navy);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* ===== BACK TO TOP ANCHOR ===== */
+a.back-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--accent);
+  color: var(--navy);
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 28px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+a.back-top:hover {
+  background-color: var(--navy);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== FOOTER DIV ===== */
+div.ski-footer {
+  background-color: var(--navy);
+  color: var(--ice);
+  padding: 50px 0 28px;
+  margin-top: 60px;
+}
+
+div.ski-footer-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+}
+
+div.ski-footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+div.ski-footer-tagline {
+  font-size: 0.83rem;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+div.ski-footer-social {
+  margin-bottom: 24px;
+}
+
+div.ski-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: var(--ice);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+div.ski-footer-social a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+div.ski-footer-links {
+  margin-bottom: 0;
+}
+
+div.ski-footer-links a {
+  color: var(--ice);
+  text-decoration: none;
+  font-size: 0.86rem;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+div.ski-footer-links a:hover { color: var(--accent); }
+
+div.ski-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 28px;
+  padding-top: 24px;
+  font-size: 0.78rem;
+  color: #4a6580;
+}
+
+div.ski-footer-bottom p {
+  margin: 12px 0 0;
+  color: #4a6580;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 680px) {
+  div.ski-hero h1 { font-size: 2.4rem; }
+  div.ski-nav { flex-direction: column; gap: 12px; padding: 14px 20px; text-align: center; }
+  div.ski-nav .nav-links a { margin-left: 10px; margin-right: 10px; }
+  div.ski-card { padding: 28px 22px; }
+  div.ski-section { padding: 0 18px; }
+  div.img-grid img { height: 180px; }
+  div.ski-cta-inner { padding: 36px 24px; }
+}

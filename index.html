@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliza J. Pehrson – Marketing Professional</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1826;
+      --navy2:  #132337;
+      --blue:   #1a4f72;
+      --mid:    #1f6291;
+      --accent: #4aa8d8;
+      --ice:    #c5def2;
+      --snow:   #f2f7fb;
+      --white:  #ffffff;
+      --text:   #1e2d3d;
+      --muted:  #5a7086;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--snow);
+      color: var(--text);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background-color: var(--navy) !important;
+      border-bottom: 3px solid var(--accent);
+      padding: 14px 0;
+    }
+    .navbar-brand {
+      color: #fff !important;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .nav-link {
+      color: var(--ice) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 14px !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent) !important;
+    }
+    .nav-link.active {
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background:
+        linear-gradient(150deg, rgba(11,24,38,0.82) 0%, rgba(19,35,55,0.78) 40%, rgba(26,79,114,0.72) 100%),
+        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&auto=format&fit=crop&q=80') center/cover no-repeat;
+      color: #fff;
+      padding: 120px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 70px;
+      background: var(--snow);
+      clip-path: polygon(0 100%, 100% 100%, 100% 40%, 75% 100%, 50% 25%, 25% 85%, 0 50%);
+    }
+    /* Subtle mountain silhouette overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: rgba(255,255,255,0.03);
+      clip-path: polygon(0 100%, 15% 40%, 30% 80%, 45% 20%, 60% 70%, 75% 35%, 90% 65%, 100% 30%, 100% 100%);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.15;
+    }
+    .hero .subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--ice);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .hero .divider-line {
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 22px auto;
+      border-radius: 2px;
+    }
+    .hero .badge-tag {
+      background-color: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      padding: 7px 18px;
+      margin: 5px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+    .hero-btn-primary {
+      background-color: var(--accent);
+      color: var(--navy);
+      border: none;
+      padding: 14px 34px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      margin: 6px;
+    }
+    .hero-btn-primary:hover {
+      background-color: #fff;
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    .hero-btn-outline {
+      background-color: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.5);
+      padding: 12px 32px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      margin: 6px;
+    }
+    .hero-btn-outline:hover {
+      border-color: #fff;
+      background-color: rgba(255,255,255,0.08);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECTIONS ===== */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .section-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* ===== ABOUT ===== */
+    .about-card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 30px rgba(11,24,38,0.08);
+      padding: 48px 52px;
+      border-top: 4px solid var(--accent);
+    }
+    .about-card p {
+      font-size: 1.02rem;
+      line-height: 1.9;
+      color: #344a5f;
+      margin-bottom: 18px;
+    }
+    .about-btn {
+      display: inline-block;
+      padding: 11px 28px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-right: 10px;
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+    .about-btn-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+    .about-btn-primary:hover { background: var(--mid); color: #fff; transform: translateY(-1px); }
+    .about-btn-outline {
+      background: transparent;
+      color: var(--blue);
+      border: 2px solid var(--blue);
+    }
+    .about-btn-outline:hover { background: var(--blue); color: #fff; transform: translateY(-1px); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip {
+      background: var(--navy);
+      color: #fff;
+      padding: 44px 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 20px;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ice);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 6px;
+    }
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* ===== HIGHLIGHT CARDS ===== */
+    .highlight-section { background-color: #e6f0f9; }
+    .hcard {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 34px 28px;
+      box-shadow: 0 2px 18px rgba(11,24,38,0.07);
+      height: 100%;
+      border-bottom: 4px solid transparent;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .hcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+    }
+    .hcard:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(11,24,38,0.14);
+      border-bottom-color: var(--accent);
+    }
+    .hcard-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hcard h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .hcard p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ===== SKILLS ===== */
+    .skill-tag {
+      display: inline-block;
+      background: transparent;
+      color: var(--blue);
+      border: 1.5px solid var(--accent);
+      border-radius: 4px;
+      padding: 7px 18px;
+      margin: 5px;
+      font-size: 0.83rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: all 0.2s;
+    }
+    .skill-tag:hover {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: var(--navy);
+      color: var(--ice);
+      padding: 50px 0 28px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .footer-links a {
+      color: var(--ice);
+      text-decoration: none;
+      font-size: 0.88rem;
+      margin: 0 12px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: var(--ice);
+      font-size: 1rem;
+      margin: 0 5px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .footer-social a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 32px;
+      padding-top: 20px;
+      font-size: 0.78rem;
+      color: #4a6580;
+    }
+    .footer-bottom a { color: #4a6580; text-decoration: none; }
+    .footer-bottom a:hover { color: var(--accent); }
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent);
+      color: var(--navy);
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .back-to-top:hover {
+      background-color: #fff;
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Eliza J. Pehrson</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon" style="filter:invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="scratch.html">Skiing</a></li>
+          <li class="nav-item"><a class="nav-link" href="app.html">Ski App</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero text-center">
+    <div class="container position-relative">
+      <p class="section-label" style="color:var(--accent);">Welcome</p>
+      <h1>Eliza J. Pehrson</h1>
+      <div class="divider-line"></div>
+      <p class="subtitle">Marketing Student &nbsp;&bull;&nbsp; Social Media Strategist &nbsp;&bull;&nbsp; Content Creator</p>
+      <div class="mt-4 mb-4">
+        <span class="badge-tag"><i class="bi bi-mortarboard-fill me-1"></i>BYU Marriott School of Business</span>
+        <span class="badge-tag"><i class="bi bi-geo-alt-fill me-1"></i>Provo, UT</span>
+        <span class="badge-tag"><i class="bi bi-translate me-1"></i>Proficient in Dutch</span>
+        <span class="badge-tag"><i class="bi bi-star-fill me-1"></i>GPA 3.81 / 4.00</span>
+      </div>
+      <div>
+        <a href="resume.html" class="hero-btn-primary"><i class="bi bi-file-person-fill me-2"></i>View Resume</a>
+        <a href="scratch.html" class="hero-btn-outline"><i class="bi bi-snow2 me-2"></i>My Skiing Passion</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="container">
+      <div class="row g-0 text-center">
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">3.81</div>
+            <div class="stat-label">GPA</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">300%</div>
+            <div class="stat-label">Referral Growth</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Volunteers Led</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">2+</div>
+            <div class="stat-label">Years Social Media</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="py-5 mt-2">
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <p class="section-label">About Me</p>
+          <h2 class="section-heading">Marketing with Purpose &amp; Creativity</h2>
+          <div class="section-rule"></div>
+          <p style="color:var(--muted); font-size:0.95rem; line-height:1.8;">
+            A BYU marketing student with a passion for storytelling, strategy, and meaningful human connection.
+          </p>
+          <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank" class="about-btn about-btn-primary mt-2">
+            <i class="bi bi-linkedin me-2"></i>LinkedIn Profile
+          </a>
+        </div>
+        <div class="col-lg-8">
+          <div class="about-card">
+            <p>
+              I'm Eliza Pehrson, a marketing student at Brigham Young University's Marriott School of Business
+              with a 3.81 GPA and a passion for storytelling through social media and content creation.
+              My experience spans nonprofit foundations, university performing arts, and international volunteer
+              service across Belgium and the Netherlands — where I served as a full-time volunteer representative
+              and developed professional-level Dutch fluency.
+            </p>
+            <p>
+              Whether I'm crafting a targeted social media strategy, analyzing campaign performance through Meta's
+              analytics tools, or building genuine community relationships, I bring creativity and analytical
+              thinking together to create measurable impact. I'm skilled in Adobe Premiere Pro and Lightroom,
+              and have developed a strong eye for visual content — shaped by 16 years of ballet and a love for
+              photography and videography.
+            </p>
+            <p style="margin-bottom:0;">
+              I believe great marketing begins with great storytelling — and I bring that conviction to every
+              project I take on, from nonprofit campaigns to university performing arts promotion.
+            </p>
+            <div class="mt-4">
+              <a href="mailto:elizajanep@gmail.com" class="about-btn about-btn-primary">
+                <i class="bi bi-envelope-fill me-2"></i>Get in Touch
+              </a>
+              <a href="resume.html" class="about-btn about-btn-outline">
+                <i class="bi bi-file-earmark-person me-2"></i>Full Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="py-5 highlight-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-label">Expertise</p>
+        <h2 class="section-heading">What I Bring to the Table</h2>
+        <div class="section-rule mx-auto"></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="hcard">
+            <div class="hcard-icon"><i class="bi bi-graph-up-arrow"></i></div>
+            <h5>Social Media Strategy</h5>
+            <p>Drove a 300% increase in customer referrals through targeted campaigns. Managed social calendars, content creation, and performance analytics using Meta tools across multiple organizations.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hcard">
+            <div class="hcard-icon"><i class="bi bi-camera-video-fill"></i></div>
+            <h5>Content Creation</h5>
+            <p>2+ years managing social media pages with original photography and videography. Proficient in Adobe Premiere Pro and Lightroom Classic for professional-quality visual storytelling.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hcard">
+            <div class="hcard-icon"><i class="bi bi-people-fill"></i></div>
+            <h5>Leadership &amp; Service</h5>
+            <p>Led leadership trainings for 100+ volunteers across Belgium and the Netherlands. Served two years on a nonprofit teen board providing resources for foster children in Oklahoma.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hcard">
+            <div class="hcard-icon"><i class="bi bi-bar-chart-fill"></i></div>
+            <h5>Campaign Analytics</h5>
+            <p>Used Meta services and data-driven approaches to standardize content performance, optimize seasonal campaigns, and improve outreach strategies for diverse audiences.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hcard">
+            <div class="hcard-icon"><i class="bi bi-palette-fill"></i></div>
+            <h5>Branding &amp; Storytelling</h5>
+            <p>Shaped organizational online presence through consistent branding for the Stella H. Oaks Foundation, BYU Performing Arts, and the Light the World holiday initiative.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hcard">
+            <div class="hcard-icon"><i class="bi bi-globe2"></i></div>
+            <h5>International Experience</h5>
+            <p>Lived and worked professionally in the Netherlands and Belgium, gaining cross-cultural communication expertise and professional fluency in Dutch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-3 mb-4 mb-lg-0">
+          <p class="section-label">Capabilities</p>
+          <h2 class="section-heading">Skills</h2>
+          <div class="section-rule"></div>
+          <p style="font-size:0.92rem; color:var(--muted); line-height:1.75;">
+            A versatile marketing skill set built across real-world experience, academic excellence, and a genuine curiosity for how brands communicate.
+          </p>
+        </div>
+        <div class="col-lg-9">
+          <span class="skill-tag">Social Media Marketing</span>
+          <span class="skill-tag">Content Strategy</span>
+          <span class="skill-tag">Adobe Premiere Pro</span>
+          <span class="skill-tag">Adobe Lightroom Classic</span>
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">Meta Ads Manager</span>
+          <span class="skill-tag">Photography</span>
+          <span class="skill-tag">Videography</span>
+          <span class="skill-tag">Dutch (Proficient)</span>
+          <span class="skill-tag">Campaign Analytics</span>
+          <span class="skill-tag">Branding &amp; Storytelling</span>
+          <span class="skill-tag">PowerPoint</span>
+          <span class="skill-tag">Nonprofit Marketing</span>
+          <span class="skill-tag">Event Promotion</span>
+          <span class="skill-tag">Cross-Cultural Communication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container text-center">
+      <div class="footer-brand">Eliza J. Pehrson</div>
+      <div class="footer-tagline">Marketing Student &bull; BYU Marriott School of Business &bull; Provo, UT</div>
+
+      <div class="footer-social mb-4">
+        <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:elizajanep@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+      </div>
+
+      <div class="footer-links mb-4">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="scratch.html">Skiing</a>
+        <a href="app.html">Ski App</a>
+        <a href="https://www.linkedin.com/in/eliza-pehrson-025875394" target="_blank">LinkedIn</a>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="mb-3">
+          <a href="#top" class="back-to-top"><i class="bi bi-arrow-up"></i>Back to Top</a>
+        </div>
+        <p class="mb-0">&copy; 2026 Eliza J. Pehrson &bull; All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
